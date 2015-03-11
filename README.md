@@ -1,4 +1,4 @@
-# Gosum
+# Gosum [![Build Status](https://travis-ci.org/cghsystems/gosum.svg)](https://travis-ci.org/cghsystems/gosum)
 
 A module that allows calculations to be run over the finances.json produced by [Grabber](https://github.com/cghsystems/grabber)
 
