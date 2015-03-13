@@ -11,8 +11,7 @@ func main() {
 	records, _ := repo.LoadRecords()
 
 	recordQuery := query.NewRecordQuery(records)
-	api := api.NewAPI(8080)
-	api.RecordQuery = recordQuery
+	api := api.NewAPI(8080, recordQuery)
 	api.Start()
 	select {}
 }

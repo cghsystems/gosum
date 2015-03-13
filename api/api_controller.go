@@ -20,7 +20,7 @@ type hyperMedia struct {
 
 type API struct {
 	port        int
-	RecordQuery query.RecordQuery `inject:""`
+	recordQuery query.RecordQuery
 }
 
 type APIHandler interface {
@@ -38,9 +38,10 @@ type MetaData struct {
 	ErrorMessage string `json:"error_message"`
 }
 
-func NewAPI(port int) *API {
+func NewAPI(port int, recordQuery query.RecordQuery) *API {
 	return &API{
-		port: port,
+		port:        port,
+		recordQuery: recordQuery,
 	}
 }
 
@@ -81,7 +82,7 @@ func (api *API) dataHandler() http.HandlerFunc {
 			MetaData: MetaData{
 				HttpStatus: http.StatusOK,
 			},
-			Records: api.RecordQuery.Records(),
+			Records: api.recordQuery.Records(),
 		}
 		recordsJSON, _ := json.Marshal(responseMessage)
 		w.Write(recordsJSON)

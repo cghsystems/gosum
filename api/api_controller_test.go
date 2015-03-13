@@ -5,7 +5,6 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/facebookgo/inject"
 	"github.com/gosum/api"
 	"github.com/gosum/query"
 	"github.com/gosum/record"
@@ -25,12 +24,7 @@ var _ = Describe("HTTP API", func() {
 		actualRecord = record.Record{SortCode: "test"}
 		query := query.NewRecordQuery(record.Records{actualRecord})
 
-		httpAPI = api.NewAPI(port)
-
-		if err := inject.Populate(query, httpAPI); err != nil {
-			Ω(err).ShouldNot(HaveOccurred())
-		}
-
+		httpAPI = api.NewAPI(port, query)
 		httpAPI.Start()
 	})
 
