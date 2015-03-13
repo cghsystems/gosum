@@ -23,7 +23,8 @@ var _ = Describe("RecordQuery", func() {
 	)
 
 	BeforeEach(func() {
-		records, err = data.LoadRecords("assets/test_data.json")
+		repo := data.NewFileRepository("assets/test_data.json")
+		records, err = repo.LoadRecords()
 		Ω(err).ShouldNot(HaveOccurred())
 		recordQuery = NewRecordQuery(records)
 	})

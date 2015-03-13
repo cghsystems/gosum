@@ -8,10 +8,20 @@ import (
 	"github.com/gosum/record"
 )
 
-func LoadRecords(jsonPath string) (record.Records, error) {
-	file, e := ioutil.ReadFile(jsonPath)
+type fileRepository struct {
+	jsonPath string
+}
+
+func NewFileRepository(jsonPath string) Repository {
+	return &fileRepository{
+		jsonPath: jsonPath,
+	}
+}
+
+func (r *fileRepository) LoadRecords() (record.Records, error) {
+	file, e := ioutil.ReadFile(r.jsonPath)
 	if e != nil {
-		return nil, errors.New("Cannot load records from " + jsonPath)
+		return nil, errors.New("Cannot load records from " + r.jsonPath)
 	}
 
 	var records record.Records

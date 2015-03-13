@@ -7,7 +7,9 @@ import (
 )
 
 func main() {
-	records, _ := data.LoadRecords("query/assets/test_data.json")
+	repo := data.NewFileRepository("query/assets/test_data.json")
+	records, _ := repo.LoadRecords()
+
 	recordQuery := query.NewRecordQuery(records)
 	api := api.NewAPI(8080)
 	api.RecordQuery = recordQuery
