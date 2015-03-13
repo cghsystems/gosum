@@ -1,13 +1,13 @@
-package repository_test
+package data_test
 
 import (
+	"github.com/gosum/data"
 	"github.com/gosum/record"
-	"github.com/gosum/repository"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("FileRepository", func() {
+var _ = Describe("Filedata", func() {
 
 	Context(".LoadRecords", func() {
 		var err error
@@ -15,14 +15,14 @@ var _ = Describe("FileRepository", func() {
 
 		Context("invalid reposotry file provided", func() {
 			It("should return an error", func() {
-				_, err = repository.LoadRecords("/path/to/invalid/file/")
+				_, err = data.LoadRecords("/path/to/invalid/file/")
 				Ω(err).Should(HaveOccurred())
 			})
 		})
 
-		Context("valid repository file provided", func() {
+		Context("valid data file provided", func() {
 			BeforeEach(func() {
-				records, err = repository.LoadRecords("../query/assets/test_data.json")
+				records, err = data.LoadRecords("../query/assets/test_data.json")
 			})
 
 			It("should load the expected number of records", func() {

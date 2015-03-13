@@ -1,4 +1,4 @@
-package repository_test
+package data_test
 
 import (
 	. "github.com/onsi/ginkgo"
@@ -9,5 +9,5 @@ import (
 
 func TestRepository(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "Repository Suite")
+	RunSpecs(t, "Data Suite")
 }

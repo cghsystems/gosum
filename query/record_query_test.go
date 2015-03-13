@@ -3,10 +3,10 @@ package query_test
 import (
 	"time"
 
+	"github.com/gosum/data"
 	. "github.com/gosum/matcher"
 	. "github.com/gosum/query"
 	"github.com/gosum/record"
-	"github.com/gosum/repository"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
@@ -23,7 +23,7 @@ var _ = Describe("RecordQuery", func() {
 	)
 
 	BeforeEach(func() {
-		records, err = repository.LoadRecords("assets/test_data.json")
+		records, err = data.LoadRecords("assets/test_data.json")
 		Ω(err).ShouldNot(HaveOccurred())
 		recordQuery = NewRecordQuery(records)
 	})
