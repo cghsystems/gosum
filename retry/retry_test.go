@@ -9,11 +9,12 @@ import (
 var _ = Describe("Retry", func() {
 	Context("successful retries", func() {
 		var (
-			actualRetries = 0
+			actualRetries int
 			err           error
 		)
 
 		BeforeEach(func() {
+			actualRetries = 0
 			err = retry.Execute(10, func() {
 				actualRetries++
 			})
