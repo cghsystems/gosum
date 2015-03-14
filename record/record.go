@@ -1,7 +1,10 @@
 package record
 
 import (
+	"crypto/md5"
+	"encoding/hex"
 	"errors"
+	"fmt"
 	"time"
 )
 
@@ -54,6 +57,19 @@ type Record struct {
 	DebitAmount            float64   `json:"debit_amount"`
 	CreditAmount           float64   `json:"credit_amount"`
 	Balance                float64   `json:"balance"`
+}
+
+func (record Record) ID() string {
+	rawKey := fmt.Sprintf(
+		"%v%v%v",
+		record.AccountNumber,
+		record.Balance,
+		record.TransactionDate,
+	)
+
+	md5 := md5.New()
+	sum := md5.Sum([]byte(rawKey))
+	return hex.EncodeToString(sum)
 }
 
 func (record Record) IsNilRecord() bool {
