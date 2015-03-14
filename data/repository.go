@@ -25,11 +25,21 @@ type httpRepository struct {
 
 func (r *httpRepository) LoadRecords() (record.Records, error) {
 	url := fmt.Sprintf("%v/%s", r.hosts[0], "data")
-	response, _ := http.Get(url)
+	response, err := http.Get(url)
+	if err != nil {
+		return nil, fmt.Errorf("cannot connect to %v", url)
+	}
 
 	var records record.Records
-	body, _ := ioutil.ReadAll(response.Body)
-	_ = json.Unmarshal(body, &records)
+	body, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		return nil, fmt.Errorf("unexpected response from server", err.Error())
+	}
+
+	err = json.Unmarshal(body, &records)
+	if err != nil {
+		return nil, fmt.Errorf("unexpected response from server: %v", err.Error())
+	}
 
 	return records, nil
 }
