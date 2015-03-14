@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/gosum/query"
-	"github.com/gosum/record"
+	"github.com/cghsystems/gosum/query"
+	"github.com/cghsystems/gosum/record"
 )
 
 type link struct {

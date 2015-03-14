@@ -1,8 +1,8 @@
 package data_test
 
 import (
-	"github.com/gosum/data"
-	"github.com/gosum/record"
+	"github.com/cghsystems/gosum/data"
+	"github.com/cghsystems/gosum/record"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

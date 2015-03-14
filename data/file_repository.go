@@ -5,7 +5,7 @@ import (
 	"errors"
 	"io/ioutil"
 
-	"github.com/gosum/record"
+	"github.com/cghsystems/gosum/record"
 )
 
 type fileRepository struct {

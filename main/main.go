@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/gosum/api"
-	"github.com/gosum/data"
-	"github.com/gosum/query"
+	"github.com/cghsystems/gosum/api"
+	"github.com/cghsystems/gosum/data"
+	"github.com/cghsystems/gosum/query"
 )
 
 func main() {

@@ -4,7 +4,7 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
-	. "github.com/gosum/record"
+	. "github.com/cghsystems/gosum/record"
 )
 
 var _ = Describe("Record", func() {

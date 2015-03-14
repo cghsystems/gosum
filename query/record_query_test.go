@@ -3,10 +3,10 @@ package query_test
 import (
 	"time"
 
-	"github.com/gosum/data"
-	. "github.com/gosum/matcher"
-	. "github.com/gosum/query"
-	"github.com/gosum/record"
+	"github.com/cghsystems/gosum/data"
+	. "github.com/cghsystems/gosum/matcher"
+	. "github.com/cghsystems/gosum/query"
+	"github.com/cghsystems/gosum/record"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

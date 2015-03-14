@@ -1,7 +1,7 @@
 package record_test
 
 import (
-	"github.com/gosum/record"
+	"github.com/cghsystems/gosum/record"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

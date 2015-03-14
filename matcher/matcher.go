@@ -1,8 +1,6 @@
 package matcher
 
-import (
-	"github.com/gosum/record"
-)
+import "github.com/cghsystems/gosum/record"
 
 type Matcher interface {
 	GetValue(record record.Record) float64

@@ -5,9 +5,9 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/gosum/api"
-	"github.com/gosum/query"
-	"github.com/gosum/record"
+	"github.com/cghsystems/gosum/api"
+	"github.com/cghsystems/gosum/query"
+	"github.com/cghsystems/gosum/record"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

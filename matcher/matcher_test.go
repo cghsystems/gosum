@@ -1,8 +1,8 @@
 package matcher_test
 
 import (
-	. "github.com/gosum/matcher"
-	. "github.com/gosum/record"
+	. "github.com/cghsystems/gosum/matcher"
+	. "github.com/cghsystems/gosum/record"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

@@ -4,8 +4,8 @@ import (
 	"strings"
 	"time"
 
-	. "github.com/gosum/matcher"
-	"github.com/gosum/record"
+	. "github.com/cghsystems/gosum/matcher"
+	"github.com/cghsystems/gosum/record"
 )
 
 type RecordQuery interface {

@@ -11,7 +11,7 @@ import (
 
 var _ = Describe("main", func() {
 	It("starts the http server", func() {
-		binPath, err := gexec.Build("github.com/gosum/main/")
+		binPath, err := gexec.Build("github.com/cghsystems/gosum/main/")
 		Ω(err).ShouldNot(HaveOccurred())
 		cmd := exec.Command(binPath)
 
