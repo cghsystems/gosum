@@ -71,7 +71,7 @@ var _ = Describe("Client", func() {
 		})
 	})
 
-	FContext("BulkSet", func() {
+	Context("BulkSet", func() {
 		BeforeEach(func() {
 			records := record.Records{testRecord}
 			err = client.BulkSet(records)
