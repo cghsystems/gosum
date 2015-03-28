@@ -8,7 +8,6 @@ import (
 )
 
 var _ = Describe("Record", func() {
-
 	var TestRecord = Record{
 		TransactionType:        CREDIT,
 		SortCode:               "12-34-56",
