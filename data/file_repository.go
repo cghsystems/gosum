@@ -3,8 +3,10 @@ package data
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io/ioutil"
 
+	"github.com/cghsystems/gosum/log"
 	"github.com/cghsystems/gosum/record"
 )
 
@@ -13,6 +15,7 @@ type fileRepository struct {
 }
 
 func NewFileRepository(jsonPath string) Repository {
+	log.Info(fmt.Sprintf("Using datasource %v", jsonPath))
 	return &fileRepository{
 		jsonPath: jsonPath,
 	}

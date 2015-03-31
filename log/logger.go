@@ -7,11 +7,14 @@ import (
 )
 
 var log = logging.MustGetLogger("example")
-var backend = logging.NewLogBackend(os.Stderr, "", 0)
 
-func Info(message string) {
+func Init() {
+	backend := logging.NewLogBackend(os.Stderr, "", 0)
 	logging.AddModuleLevel(backend)
 	logging.SetBackend(backend)
+}
+
+func Info(message string) {
 	log.Info(message)
 }
 
