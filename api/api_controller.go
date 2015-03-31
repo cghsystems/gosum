@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/cghsystems/gosum/log"
 	"github.com/cghsystems/gosum/query"
 	"github.com/cghsystems/gosum/record"
 )
@@ -50,6 +51,7 @@ func (api *API) Start() {
 	http.HandleFunc("/api/accounts/query/data.json", api.dataHandler())
 	port := fmt.Sprintf(":%v", api.port)
 
+	log.Info(fmt.Sprintf("Starting API Handler on port %v", port))
 	go http.ListenAndServe(port, nil)
 }
 
@@ -57,6 +59,7 @@ func (api *API) dataHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		limitValue := r.FormValue("limit")
 		limit, err := strconv.Atoi(limitValue)
+		log.Debug(fmt.Sprintf("Serving /api/accounts/query/data.json?limit=%v", limit))
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 
 		if err != nil {
