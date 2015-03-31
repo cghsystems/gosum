@@ -9,8 +9,8 @@ Main will start the http server
 
 The transaction types supplied by Lloyds TSB in statements
 
-|name|stement value|
-|----|-------------|
-|DEB | Debit       |
-|CR  | Credit      |
-|FPI | Faster Payments Inwards |
+| name | stement value           |
+| ---- | ------------------------|
+| DEB  | Debit                   |
+| CR   | Credit                  |
+| FPI  | Faster Payments Inwards |
