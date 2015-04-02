@@ -13,9 +13,9 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = FDescribe("QueryApi", func() {
+var _ = Describe("QueryApi", func() {
 	var (
-		writer          *httptest.ResponseRecorder
+		response        *httptest.ResponseRecorder
 		request         *http.Request
 		responseMessage api.ResponseMessage
 		actualRecord    record.Record
@@ -27,11 +27,11 @@ var _ = FDescribe("QueryApi", func() {
 
 		actualRecord = record.Record{SortCode: "test"}
 		query := query.NewRecordQuery(record.Records{actualRecord})
-		writer = httptest.NewRecorder()
+		response = httptest.NewRecorder()
 		api := api.NewAPI(80, query)
-		api.QueryAPI(writer, request)
+		api.QueryAPI(response, request)
 
-		body, err := ioutil.ReadAll(writer.Body)
+		body, err := ioutil.ReadAll(response.Body)
 		Ω(err).ShouldNot(HaveOccurred())
 		json.Unmarshal(body, &responseMessage)
 	})
@@ -42,11 +42,11 @@ var _ = FDescribe("QueryApi", func() {
 		})
 
 		It("returns http OK status", func() {
-			Ω(writer.Code).To(Equal(http.StatusOK))
+			Ω(response.Code).To(Equal(http.StatusOK))
 		})
 
 		It("has a content type of application/json", func() {
-			contentType := writer.HeaderMap["Content-Type"][0]
+			contentType := response.HeaderMap["Content-Type"][0]
 			Ω(contentType).To(Equal("application/json"))
 		})
 
@@ -99,7 +99,7 @@ var _ = FDescribe("QueryApi", func() {
 		})
 
 		It("returns a 400 in the header", func() {
-			Ω(http.StatusBadRequest).Should(Equal(writer.Code))
+			Ω(http.StatusBadRequest).Should(Equal(response.Code))
 		})
 	})
 })
