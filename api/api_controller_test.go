@@ -57,61 +57,6 @@ var _ = Describe("HTTP API", func() {
 			It("contains the expected meta data", func() {
 				Ω(http.StatusOK).Should(Equal(responseMessage.MetaData.HttpStatus))
 			})
-
-			It("contains no error message ", func() {
-				Ω(responseMessage.MetaData.ErrorMessage).Should(BeEmpty())
-			})
-
-			It("contains the expected number of records", func() {
-				Ω(len(responseMessage.Records)).Should(Equal(1))
-			})
-
-			It("contains the expected record", func() {
-				record, _ := responseMessage.Records.First()
-				Ω(record.SortCode).Should(Equal(actualRecord.SortCode))
-			})
-
-			It("returns no data if limit is > 0", func() {
-				expectedJson := `[]`
-				resp, err := http.Get("http://localhost:9898/api/accounts/query/data.json?limit=1")
-				Ω(err).NotTo(HaveOccurred())
-				body, _ := ioutil.ReadAll(resp.Body)
-				Ω(string(body)).Should(MatchJSON(expectedJson))
-			})
-		})
-
-		Context("/api/accounts/query/data.json?limit=unparseable", func() {
-			var (
-				resp            *http.Response
-				responseMessage api.ResponseMessage
-			)
-
-			BeforeEach(func() {
-				var err error
-				resp, err = http.Get("http://localhost:9898/api/accounts/query/data.json?limit=wibble1")
-				Ω(err).NotTo(HaveOccurred())
-				bodyBytes, _ := ioutil.ReadAll(resp.Body)
-				json.Unmarshal(bodyBytes, &responseMessage)
-			})
-
-			It("contains zero records", func() {
-				Ω(len(responseMessage.Records)).Should(Equal(0))
-			})
-
-			It("metadata contains bad request status code", func() {
-				httpStatusCode := responseMessage.MetaData.HttpStatus
-				Ω(http.StatusBadRequest).Should(Equal(httpStatusCode))
-			})
-
-			It("metadata contains the error message", func() {
-				errorMessage := responseMessage.MetaData.ErrorMessage
-				expectedError := `Error parsing limit form value: strconv.ParseInt: parsing "wibble1": invalid syntax`
-				Ω(errorMessage).Should(Equal(expectedError))
-			})
-
-			It("returns a 400 in the header", func() {
-				Ω(http.StatusBadRequest).Should(Equal(resp.StatusCode))
-			})
 		})
 	})
 })
