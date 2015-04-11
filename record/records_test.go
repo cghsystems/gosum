@@ -32,7 +32,7 @@ var _ = Describe("Records", func() {
 		})
 	})
 
-	FContext("Sorting records", func() {
+	Context("Sorting records", func() {
 		var time1, time2, time3 time.Time
 		BeforeEach(func() {
 			time1 = time.Now()

@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/cghsystems/gosum/api"
+	"github.com/cghsystems/gosum/metrics"
 	"github.com/cghsystems/gosum/query"
 	"github.com/cghsystems/gosum/record"
 	. "github.com/onsi/ginkgo"
@@ -57,6 +58,17 @@ var _ = Describe("HTTP API", func() {
 			It("contains the expected meta data", func() {
 				Ω(http.StatusOK).Should(Equal(responseMessage.MetaData.HttpStatus))
 			})
+		})
+	})
+
+	Context("records metrics", func() {
+		BeforeEach(func() {
+			metrics.RecordFunc(metrics.RecordInMemory)
+			http.Get("http://localhost:9898/api")
+		})
+
+		It("records the expected number of metrics", func() {
+			Ω(metrics.InMemoryMetrics).To(HaveLen(1))
 		})
 	})
 })

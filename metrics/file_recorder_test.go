@@ -18,7 +18,8 @@ var _ = Describe("Metrics File Recorder", func() {
 	Context("metrics are recorded", func() {
 		const filePath = "/tmp/FileRecorderTest"
 		BeforeEach(func() {
-			InitFileRecorder(filePath)
+			err := InitFileRecorder(filePath)
+			Ω(err).ToNot(HaveOccurred())
 			Ω(filePath).Should(FileExists())
 		})
 
@@ -27,10 +28,11 @@ var _ = Describe("Metrics File Recorder", func() {
 		})
 
 		It("records the time against the api call", func() {
-			now := time.Now()
-			Record("/test", now)
+			start := time.Now()
+			end := time.Now()
+			RecordInFile("/test", start, end)
 
-			expectedContents := fmt.Sprintf("/test,%v", now)
+			expectedContents := fmt.Sprintf("/test,%v,%v", start, end)
 			actualContents := fileContents(filePath)
 
 			Ω(expectedContents).Should(Equal(actualContents))
@@ -47,8 +49,9 @@ type FileExistsMatcher struct{}
 func (matcher *FileExistsMatcher) Match(actual interface{}) (success bool, err error) {
 	filePath := actual.(string)
 	_, err = os.Stat(filePath)
-	if err != nil {
-		return false, err
+	if err == nil {
+		fmt.Println("File not found")
+		return true, err
 	}
 	return os.IsNotExist(err), nil
 }

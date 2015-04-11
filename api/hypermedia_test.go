@@ -7,6 +7,8 @@ import (
 	"net/http/httptest"
 
 	"github.com/cghsystems/gosum/api"
+	"github.com/cghsystems/gosum/log"
+	"github.com/cghsystems/gosum/metrics"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -20,6 +22,10 @@ var _ = Describe("Hypermedia", func() {
 		err             error
 	)
 	JustBeforeEach(func() {
+		log.Init()
+		err := metrics.InitFileRecorder("/tmp/test_metrics")
+
+		Ω(err).ToNot(HaveOccurred())
 		Ω(err).ToNot(HaveOccurred())
 
 		response = httptest.NewRecorder()
