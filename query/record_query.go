@@ -55,7 +55,6 @@ func (recordQuery *recordQuery) Sum(matcher Matcher) float64 {
 }
 
 func (recordQuery *recordQuery) FindHighest(matcher Matcher) record.Records {
-
 	winningRecord := record.Record{
 		DebitAmount:  float64(-99999999),
 		CreditAmount: float64(-99999999),
