@@ -1,6 +1,8 @@
 package record_test
 
 import (
+	"time"
+
 	"github.com/cghsystems/gosum/record"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -27,6 +29,27 @@ var _ = Describe("Records", func() {
 				_, err := records.Delete(toDelete)
 				Ω(err).Should(HaveOccurred())
 			})
+		})
+	})
+
+	FContext("Sorting records", func() {
+		var time1, time2, time3 time.Time
+		BeforeEach(func() {
+			time1 = time.Now()
+			time2 = time.Now().Add(time.Second * 2)
+			time3 = time.Now().Add(time.Second * 3)
+
+			record1 := record.Record{TransactionDate: time1}
+			record2 := record.Record{TransactionDate: time2}
+			record3 := record.Record{TransactionDate: time3}
+			records = record.Records{record3, record2, record1}
+			records.Sort()
+		})
+
+		It("Sorts the records in time descending order", func() {
+			Ω(records[0].TransactionDate).Should(Equal(time1))
+			Ω(records[1].TransactionDate).Should(Equal(time2))
+			Ω(records[2].TransactionDate).Should(Equal(time3))
 		})
 	})
 

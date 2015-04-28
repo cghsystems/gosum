@@ -5,6 +5,7 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
+	"sort"
 	"time"
 )
 
@@ -45,6 +46,24 @@ func (records Records) indexOf(target Record) int {
 		}
 	}
 	return -1
+}
+
+func (records Records) Sort() {
+	sort.Sort(records)
+}
+
+func (records Records) Len() int {
+	return len(records)
+}
+
+func (records Records) Less(i, j int) bool {
+	record1 := records[i]
+	record2 := records[j]
+	return record1.TransactionDate.Before(record2.TransactionDate)
+}
+
+func (record Records) Swap(i, j int) {
+	record[i], record[j] = record[j], record[i]
 }
 
 // Record is the struct that represents the a record taken from the collection in assests/finances.json
